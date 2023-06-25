@@ -1,25 +1,30 @@
 import React , {useState} from "react";
-
 function App() {
     const [text , setText] = useState("");
-    function value(event) { 
+    const [itemsList , setItems] = useState([]);
+
+    function valueText(event) { 
         setText(event.target.value);
-        console.log(text);
-     }
+    }
+    function addToArray() { 
+      setItems([...itemsList , text]);
+    }
   return (
     <div className="container">
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input name="todo" onChange={value} type="text" value={text}/>
-        <button>
+        <input name="todo" onChange={valueText} type="text" value={text}/>
+        <button onClick={addToArray}>
           <span>Add</span>
         </button>
       </div>
       <div>
-        <ul>
-          <li>A Item</li>
+      <ul>
+        {
+            itemsList.map((x)=><li>{x}</li>)
+        }
         </ul>
       </div>
     </div>
