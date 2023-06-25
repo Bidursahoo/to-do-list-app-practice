@@ -1,4 +1,5 @@
 import React , {useState} from "react";
+var count = 0;
 function App() {
     const [text , setText] = useState("");
     const [itemsList , setItems] = useState([]);
@@ -7,7 +8,13 @@ function App() {
         setText(event.target.value);
     }
     function addToArray() { 
-      setItems([...itemsList , text]);
+      if(text.length > 0){
+        setItems([...itemsList , text]);
+        setText("");
+      }else{
+        alert("You need to enter some todo items")
+      }
+      
     }
   return (
     <div className="container">
@@ -23,7 +30,7 @@ function App() {
       <div>
       <ul>
         {
-            itemsList.map((x)=><li>{x}</li>)
+            itemsList.map((x)=><li key={count++}>{x}</li>)
         }
         </ul>
       </div>
